@@ -1,0 +1,5 @@
+- name: Set up Jenkins plugins
+  hosts: any
+  become: yes
+  roles:
+    - roles/jenkins

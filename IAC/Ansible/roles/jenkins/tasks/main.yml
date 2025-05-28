@@ -1,0 +1,134 @@
+# SPDX-License-Identifier: MIT-0
+---
+# tasks file for jenkins setup + kubectl + istioctl
+
+## ----------------------------
+## Jenkins + Java Installation
+## ----------------------------
+
+- name: Install Java
+  apt:
+    name: openjdk-21-jre-headless
+    state: present
+  become: true
+
+- name: Add Jenkins repository key
+  apt_key:
+    url: https://pkg.jenkins.io/debian/jenkins.io.key
+    state: present
+  become: true
+
+- name: Add Jenkins repository
+  apt_repository:
+    repo: deb http://pkg.jenkins.io/debian-stable binary/
+    state: present
+  become: true
+
+- name: Install Jenkins
+  apt:
+    name: jenkins
+    state: present
+  become: true
+
+- name: Start and enable Jenkins
+  systemd:
+    name: jenkins
+    state: started
+    enabled: true
+  become: true
+
+## ----------------------------
+## AWS CLI Installation
+## ----------------------------
+- name: Install unzip
+  apt:
+    name: unzip
+    state: present
+  become: true
+
+- name: Download AWS CLI installer
+  get_url:
+    url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: /tmp/awscliv2.zip
+
+- name: Unzip AWS CLI installer
+  unarchive:
+    src: /tmp/awscliv2.zip
+    dest: /tmp/
+    remote_src: yes
+
+- name: Install or update AWS CLI
+  command: /tmp/aws/install --update
+  become: true
+
+
+## ----------------------------
+## kubectl Installation
+## ----------------------------
+
+- name: Ensure curl is installed
+  apt:
+    name: curl
+    state: present
+  become: true
+
+- name: Download stable version tag
+  get_url:
+    url: https://dl.k8s.io/release/stable.txt
+    dest: /tmp/kubectl_version.txt
+
+- name: Read kubectl version
+  shell: cat /tmp/kubectl_version.txt
+  register: kubectl_version
+  changed_when: false
+
+- name: Download kubectl binary
+  get_url:
+    url: "https://dl.k8s.io/release/{{ kubectl_version.stdout }}/bin/linux/amd64/kubectl"
+    dest: /usr/local/bin/kubectl
+    mode: '0755'
+  become: true
+
+- name: Verify kubectl installation
+  shell: kubectl version --client=true
+  register: kubectl_check
+  changed_when: false
+
+- name: Show kubectl version
+  debug:
+    msg: "kubectl installed: {{ kubectl_check.stdout }}"
+
+
+## ----------------------------
+## istioctl Installation + Profile Install
+## ----------------------------
+
+- name: Set Istio version
+  set_fact:
+    istio_version: "1.22.1"
+
+- name: Download Istio release
+  get_url:
+    url: "https://github.com/istio/istio/releases/download/{{ istio_version }}/istio-{{ istio_version }}-linux-amd64.tar.gz"
+    dest: /tmp/istio.tar.gz
+
+- name: Extract Istio release
+  unarchive:
+    src: /tmp/istio.tar.gz
+    dest: /tmp/
+    remote_src: yes
+
+- name: Move istioctl to /usr/local/bin
+  ansible.builtin.copy:
+    src: "/tmp/istio-{{ istio_version }}/bin/istioctl"
+    dest: /usr/local/bin/istioctl
+    mode: '0755'
+    remote_src: true
+  become: true
+  
+- name: Verify istioctl installation
+  shell: istioctl version --short
+  register: istioctl_check
+  changed_when: false
+
+

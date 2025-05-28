@@ -1,0 +1,5 @@
+- name: Set up eks cluser plugins
+  hosts: any
+  become: yes
+  roles:
+    - roles/eks-cluster
