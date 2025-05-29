@@ -9,7 +9,7 @@ variable "s3_bucket_name" {
   type        = string
   # add aws account id to bucket name to make it unique
     #default     = "backend-${data.aws_caller_identity.current.account_id}" 
-    default = "backend-975050012121"
+    default = "backend-058264397013"
 }
 
 variable "dynamodb_table_name" {

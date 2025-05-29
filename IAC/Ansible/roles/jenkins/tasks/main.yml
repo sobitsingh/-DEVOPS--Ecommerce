@@ -1,10 +1,10 @@
-# SPDX-License-Identifier: MIT-0
 ---
-# tasks file for jenkins setup + kubectl + istioctl
-
 ## ----------------------------
 ## Jenkins + Java Installation
 ## ----------------------------
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
 
 - name: Install Java
   apt:
@@ -12,17 +12,14 @@
     state: present
   become: true
 
-- name: Add Jenkins repository key
-  apt_key:
-    url: https://pkg.jenkins.io/debian/jenkins.io.key
-    state: present
-  become: true
-
-- name: Add Jenkins repository
-  apt_repository:
-    repo: deb http://pkg.jenkins.io/debian-stable binary/
-    state: present
-  become: true
+- name: Get Jenkins Repo
+  ansible.builtin.shell: |
+    sudo mkdir -p /etc/apt/keyrings
+    sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+    echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+    sudo apt-get update
+  args:
+    executable: /bin/bash
 
 - name: Install Jenkins
   apt:
@@ -30,12 +27,16 @@
     state: present
   become: true
 
-- name: Start and enable Jenkins
+- name: Enable and start Jenkins
   systemd:
     name: jenkins
     state: started
     enabled: true
   become: true
+
+- name: Default Jenkins Password
+  ansible.builtin.shell: |
+    sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 ## ----------------------------
 ## AWS CLI Installation
@@ -130,5 +131,4 @@
   shell: istioctl version --short
   register: istioctl_check
   changed_when: false
-
 
