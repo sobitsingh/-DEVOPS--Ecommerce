@@ -5,5 +5,5 @@
 # Ignore Terraform provider binaries and cache
 .terraform/
 
-# ignore pem file
-IAC/Ansible/Inventory/jenkins.pem
+# Ignore all .pem files
+*.pem

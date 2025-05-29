@@ -1,13 +1,13 @@
 variable "ingress" {
   description = "List of ingress rules for the security group"
   type = list(number)
-  default = [ 80,443,22,8080,20001 ]
+  default = [ 80,443,22,8080,20001,9090 ]
 }
 
 variable "egress" {
   description = "List of egress rules for the security group"
   type = list(number)
-  default = [ 80,443,22,8080,20001 ]
+  default = [ 80,443,22,8080,20001,9090 ]
 }
 
 variable "ec2-frontend-sg" {

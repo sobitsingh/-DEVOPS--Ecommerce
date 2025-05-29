@@ -40,6 +40,10 @@ pipeline {
                             echo "[INFO] Prometheus service not found. Applying manually..."
                             kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.22/samples/addons/prometheus.yaml
                         }
+                        kubectl get svc grafana -n istio-system || {
+                            echo "[INFO] Grafana service not found. Applying manually..."
+                            kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.22/samples/addons/grafana.yaml
+                        }
                         kubectl apply -f complete-deploy.yaml
                         kubectl delete po --all -n default
                     '''
