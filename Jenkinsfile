@@ -20,7 +20,6 @@ pipeline {
                 }
             }
         }
-
         stage('eks-deploy') {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws']]){
@@ -45,10 +44,29 @@ pipeline {
                             kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.22/samples/addons/grafana.yaml
                         }
                         kubectl apply -f complete-deploy.yaml
+                        kubectl apply -f virtual-service.yaml
                         kubectl delete po --all -n default
                     '''
                 }
             }
+            }
+        }
+        stage("ELK Setup"){
+            withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws']]){
+                script{
+                    sh """
+                       cd ultimate-devops-project-demo/kubernetes/ELK/
+                       helm repo add elastic https://helm.elastic.co
+                       helm repo update
+                       helm install elasticsearch elastic/elasticsearch -f elasticsearch-values.yaml
+                       helm install filebeat elastic/filebeat -f filebeat-values.yaml
+                       helm install logstash elastic/logstash -f logstash-values.yaml
+                       helm install kibana elastic/kibana -f kibana-values.yaml
+                       kubectl get secret elasticsearch-master-credentials -o jsonpath="{.data.username}" | base64 --decode
+                       kubectl get svc kibana-kibana
+
+                    """
+                }
             }
         }
     }

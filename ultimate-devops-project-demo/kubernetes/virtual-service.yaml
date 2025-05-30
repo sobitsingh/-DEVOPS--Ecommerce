@@ -1,0 +1,475 @@
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-adservice
+spec:
+  hosts:
+  - opentelemetry-demo-adservice.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-adservice.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-cartservice
+spec:
+  hosts:
+  - opentelemetry-demo-cartservice.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-cartservice.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-checkoutservice
+spec:
+  hosts:
+  - opentelemetry-demo-checkoutservice.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-checkoutservice.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-currencyservice
+spec:
+  hosts:
+  - opentelemetry-demo-currencyservice.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-currencyservice.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-emailservice
+spec:
+  hosts:
+  - opentelemetry-demo-emailservice.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-emailservice.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-flagd
+spec:
+  hosts:
+  - opentelemetry-demo-flagd.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-flagd.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-frontend
+spec:
+  hosts:
+  - opentelemetry-demo-frontend.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-frontend.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-frontendproxy
+spec:
+  hosts:
+  - opentelemetry-demo-frontendproxy.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-frontendproxy.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-imageprovider
+spec:
+  hosts:
+  - opentelemetry-demo-imageprovider.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-imageprovider.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-kafka
+spec:
+  hosts:
+  - opentelemetry-demo-kafka.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-kafka.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-loadgenerator
+spec:
+  hosts:
+  - opentelemetry-demo-loadgenerator.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-loadgenerator.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-paymentservice
+spec:
+  hosts:
+  - opentelemetry-demo-paymentservice.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-paymentservice.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-productcatalogservice
+spec:
+  hosts:
+  - opentelemetry-demo-productcatalogservice.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-productcatalogservice.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-quoteservice
+spec:
+  hosts:
+  - opentelemetry-demo-quoteservice.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-quoteservice.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-recommendationservice
+spec:
+  hosts:
+  - opentelemetry-demo-recommendationservice.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-recommendationservice.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-shippingservice
+spec:
+  hosts:
+  - opentelemetry-demo-shippingservice.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-shippingservice.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: opentelemetry-demo-valkey
+spec:
+  hosts:
+  - opentelemetry-demo-valkey.default.svc.cluster.local
+  http:
+  - timeout: 5s
+    route:
+    - destination:
+        host: opentelemetry-demo-valkey.default.svc.cluster.local
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-adservice
+spec:
+  host: opentelemetry-demo-adservice.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-adservice
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-cartservice
+spec:
+  host: opentelemetry-demo-cartservice.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-cartservice
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-checkoutservice
+spec:
+  host: opentelemetry-demo-checkoutservice.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-checkoutservice
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-currencyservice
+spec:
+  host: opentelemetry-demo-currencyservice.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-currencyservice
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-emailservice
+spec:
+  host: opentelemetry-demo-emailservice.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-emailservice
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-flagd
+spec:
+  host: opentelemetry-demo-flagd.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-flagd
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-frontend
+spec:
+  host: opentelemetry-demo-frontend.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-frontend
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-frontendproxy
+spec:
+  host: opentelemetry-demo-frontendproxy.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-frontendproxy
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-imageprovider
+spec:
+  host: opentelemetry-demo-imageprovider.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-imageprovider
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-kafka
+spec:
+  host: opentelemetry-demo-kafka.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-kafka
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-loadgenerator
+spec:
+  host: opentelemetry-demo-loadgenerator.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-loadgenerator
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-paymentservice
+spec:
+  host: opentelemetry-demo-paymentservice.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-paymentservice
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-productcatalogservice
+spec:
+  host: opentelemetry-demo-productcatalogservice.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-productcatalogservice
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-quoteservice
+spec:
+  host: opentelemetry-demo-quoteservice.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-quoteservice
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-recommendationservice
+spec:
+  host: opentelemetry-demo-recommendationservice.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-recommendationservice
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-shippingservice
+spec:
+  host: opentelemetry-demo-shippingservice.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-shippingservice
+      app.kubernetes.io/version: 1.12.0
+
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: opentelemetry-demo-valkey
+spec:
+  host: opentelemetry-demo-valkey.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      app.kubernetes.io/name: opentelemetry-demo-valkey
+      app.kubernetes.io/version: 1.12.0
