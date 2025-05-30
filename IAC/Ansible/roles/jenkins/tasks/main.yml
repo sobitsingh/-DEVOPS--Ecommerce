@@ -34,9 +34,6 @@
     enabled: true
   become: true
 
-- name: Default Jenkins Password
-  ansible.builtin.shell: |
-    sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 ## ----------------------------
 ## AWS CLI Installation

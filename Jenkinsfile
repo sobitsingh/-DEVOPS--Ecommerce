@@ -5,7 +5,6 @@ pipeline {
         AWS_REGION = 'us-east-1'
         CLUSTER_NAME = 'open-tele-eks'
     }
-
     stages {
         stage('Configure Kubeconfig') {
             steps {
@@ -52,20 +51,22 @@ pipeline {
             }
         }
         stage("ELK Setup"){
-            withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws']]){
-                script{
-                    sh """
-                       cd ultimate-devops-project-demo/kubernetes/ELK/
-                       helm repo add elastic https://helm.elastic.co
-                       helm repo update
-                       helm install elasticsearch elastic/elasticsearch -f elasticsearch-values.yaml
-                       helm install filebeat elastic/filebeat -f filebeat-values.yaml
-                       helm install logstash elastic/logstash -f logstash-values.yaml
-                       helm install kibana elastic/kibana -f kibana-values.yaml
-                       kubectl get secret elasticsearch-master-credentials -o jsonpath="{.data.username}" | base64 --decode
-                       kubectl get svc kibana-kibana
+            steps{
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws']]){
+                    script{
+                        sh """
+                        cd ultimate-devops-project-demo/kubernetes/ELK/
+                        helm repo add elastic https://helm.elastic.co
+                        helm repo update
+                        helm install elasticsearch elastic/elasticsearch -f elasticsearch-values.yaml
+                        helm install filebeat elastic/filebeat -f filebeat-values.yaml
+                        helm install logstash elastic/logstash -f logstash-values.yaml
+                        helm install kibana elastic/kibana -f kibana-values.yaml
+                        kubectl get secret elasticsearch-master-credentials -o jsonpath="{.data.username}" | base64 --decode
+                        kubectl get svc kibana-kibana
 
-                    """
+                        """
+                    }
                 }
             }
         }
