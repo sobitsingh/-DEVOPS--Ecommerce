@@ -58,9 +58,6 @@ pipeline {
                         cd ultimate-devops-project-demo/kubernetes/ELK/
                         helm repo add elastic https://helm.elastic.co
                         helm repo update
-                        // helm upgrade --install elasticsearch elastic/elasticsearch -f elasticsearch-values.yaml
-                        // helm upgrade --install filebeat elastic/filebeat -f filebeat-values.yaml
-                        // helm upgrade --install logstash elastic/logstash -f logstash-values.yaml
                         helm upgrade --install kibana elastic/kibana -f kibana-values.yaml
                         kubectl get secret elasticsearch-master-credentials -o jsonpath="{.data.username}" | base64 --decode
                         kubectl get svc kibana-kibana
